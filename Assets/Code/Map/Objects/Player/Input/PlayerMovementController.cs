@@ -4,10 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovementController : NestedComponent
 {
     public string MovementActionName;
-    public string FallActionName;
-
     public float MovementSpeed;
-
 
     private InputAction m_movementAction;
     private Rigidbody2D m_rigidbody2D;
@@ -49,8 +46,8 @@ public class PlayerMovementController : NestedComponent
         if (isTurnedRight == m_isTurnedRight)
             return;
 
-        var myScale = transform.localScale;
-        transform.localScale = new Vector3(myScale.x * -1, myScale.y);
+        var scale = m_rigidbody2D.transform.localScale;
+        m_rigidbody2D.transform.localScale = new Vector3(scale.x * -1, scale.y, scale.z);
         m_isTurnedRight = isTurnedRight;
     }
 }
