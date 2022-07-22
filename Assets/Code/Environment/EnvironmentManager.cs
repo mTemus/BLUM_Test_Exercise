@@ -1,13 +1,15 @@
 using UnityEngine;
+using Zenject;
 
 public class EnvironmentManager : MonoBehaviour
 {
     [SerializeField] private PlayerJumpDust m_jumpDustEffect;
 
-    private void Start()
+    [Inject]
+    public void SubscribeToEvents(IEventsManager eventsManager)
     {
-        EventsManager.Instance.SubscribeToEvent(PlayerObjectEvents.OnJumpStart, OnPlayerJump);
-        EventsManager.Instance.SubscribeToEvent(PlayerObjectEvents.OnJumpEnd, OnPlayerJump);
+        eventsManager.SubscribeToEvent(PlayerObjectEvents.OnJumpStart, OnPlayerJump);
+        eventsManager.SubscribeToEvent(PlayerObjectEvents.OnJumpEnd, OnPlayerJump);
     }
 
     private void OnPlayerJump(string eventName, object data)

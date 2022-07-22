@@ -1,18 +1,17 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public delegate void EventManagerEventListener(string eventName, object data);
 
-public class EventsManager : MonoBehaviour
+public interface IEventsManager
 {
-    public static EventsManager Instance { get; private set; }
+    public void SubscribeToEvent(string eventName, ObjectEventListener listener);
+    public void UnsubscribeFromEvent(string eventName, ObjectEventListener listener);
+    public void CallEvent(string eventName, object data);
+}
 
+public class EventsManager : IEventsManager
+{
     private Dictionary<string, ObjectEventListener> m_eventListeners = new Dictionary<string, ObjectEventListener>();
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     public void SubscribeToEvent(string eventName, ObjectEventListener listener)
     {

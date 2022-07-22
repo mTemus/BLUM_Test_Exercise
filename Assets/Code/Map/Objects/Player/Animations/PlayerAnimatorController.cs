@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class PlayerAnimatorController : NestedComponent
 {
@@ -6,12 +7,19 @@ public class PlayerAnimatorController : NestedComponent
     public string VelocityYParameterName;
     public string IsGroundedParameterName;
 
+    private IEventsManager m_eventsManager;
     private Animator m_animator;
     private PlayerPhysics2DHandler m_playerPhysics2DHandler;
 
     private float m_velocityX;
     private float m_velocityY;
     private bool m_isGrounded;
+
+    [Inject]
+    private void Construct(IEventsManager eventsManager)
+    {
+        m_eventsManager = eventsManager;
+    }
 
     private void Start()
     {
@@ -55,7 +63,7 @@ public class PlayerAnimatorController : NestedComponent
         if (m_playerPhysics2DHandler.IsGrounded.Value)
             return;
 
-        EventsManager.Instance.CallEvent(PlayerObjectEvents.OnJumpStart, transform.parent.position);
+        m_eventsManager.CallEvent(PlayerObjectEvents.OnJumpStart, transform.parent.position);
     }
 
     public void OnJumpEnd()
@@ -63,6 +71,6 @@ public class PlayerAnimatorController : NestedComponent
         if (!m_playerPhysics2DHandler.IsGrounded.Value)
             return;
 
-        EventsManager.Instance.CallEvent(PlayerObjectEvents.OnJumpEnd, transform.parent.position);
+        m_eventsManager.CallEvent(PlayerObjectEvents.OnJumpEnd, transform.parent.position);
     }
 }
