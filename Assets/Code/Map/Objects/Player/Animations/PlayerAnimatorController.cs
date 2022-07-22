@@ -7,6 +7,7 @@ public class PlayerAnimatorController : NestedComponent
     public string IsGroundedParameterName;
 
     private Animator m_animator;
+    private PlayerPhysics2DHandler m_playerPhysics2DHandler;
 
     private float m_velocityX;
     private float m_velocityY;
@@ -15,10 +16,10 @@ public class PlayerAnimatorController : NestedComponent
     private void Start()
     {
         m_animator = GetComponent<Animator>();
-        var physicsHandler = GetComponentInRoot<PlayerPhysics2DHandler>();
+        m_playerPhysics2DHandler = GetComponentInRoot<PlayerPhysics2DHandler>();
 
-        physicsHandler.IsGrounded.AddChangedListener(OnGroundedChanged);
-        physicsHandler.Velocity.AddChangedListener(OnVelocityChanged);
+        m_playerPhysics2DHandler.IsGrounded.AddChangedListener(OnGroundedChanged);
+        m_playerPhysics2DHandler.Velocity.AddChangedListener(OnVelocityChanged);
     }
 
     private void OnVelocityChanged(SimpleValueBase value)
@@ -47,5 +48,21 @@ public class PlayerAnimatorController : NestedComponent
 
         m_animator.SetBool(IsGroundedParameterName, isGrounded);
         m_isGrounded = isGrounded;
+    }
+
+    public void OnJumpStart()
+    {
+        if (m_playerPhysics2DHandler.IsGrounded.Value)
+            return;
+
+        EventsManager.Instance.CallEvent(PlayerObjectEvents.OnJumpStart, transform.parent.position);
+    }
+
+    public void OnJumpEnd()
+    {
+        if (!m_playerPhysics2DHandler.IsGrounded.Value)
+            return;
+
+        EventsManager.Instance.CallEvent(PlayerObjectEvents.OnJumpEnd, transform.parent.position);
     }
 }

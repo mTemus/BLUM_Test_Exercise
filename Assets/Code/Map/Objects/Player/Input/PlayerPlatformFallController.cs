@@ -11,7 +11,6 @@ public class PlayerPlatformFallController : NestedComponent
     {
         var playerInput = GetComponentInRoot<PlayerInput>();
         playerInput.actions.FindAction(FallActionName).performed += FallThrough;
-
         var eventsContainer = GetComponentFromRoot<ObjectEventsContainer>();
         eventsContainer.SubscribeToEvent(PlayerObjectEvents.OnCollisionEnter2D, OnCollision2DEntered);
         eventsContainer.SubscribeToEvent(PlayerObjectEvents.OnCollisionExit2D, OnCollision2DExited);

@@ -11,9 +11,6 @@ public class PlayerMovementController : NestedComponent
     private bool m_isStandingStill = true;
     private bool m_isTurnedRight;
 
-    private GameObject m_currentPlatform;
-
-    // Start is called before the first frame update
     void Awake()
     {
         m_rigidbody2D = GetComponentFromRoot<Rigidbody2D>();
