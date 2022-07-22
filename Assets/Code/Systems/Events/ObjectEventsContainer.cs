@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void EventsManagerEventListener(string eventName, object data);
+public delegate void ObjectEventListener(string eventName, object data);
 
 public class ObjectEventsContainer : MonoBehaviour
 {
-    private Dictionary<string, EventsManagerEventListener> m_eventListeners = new Dictionary<string, EventsManagerEventListener>();
+    private Dictionary<string, ObjectEventListener> m_eventListeners = new Dictionary<string, ObjectEventListener>();
 
-    public void SubscribeToEvent(string eventName, EventsManagerEventListener listener)
+    public void SubscribeToEvent(string eventName, ObjectEventListener listener)
     {
         if (m_eventListeners.ContainsKey(eventName))
             m_eventListeners[eventName] += listener;
@@ -15,7 +15,7 @@ public class ObjectEventsContainer : MonoBehaviour
             m_eventListeners.Add(eventName, listener);
     }
 
-    public void UnsubscribeFromEvent(string eventName, EventsManagerEventListener listener)
+    public void UnsubscribeFromEvent(string eventName, ObjectEventListener listener)
     {
         if (m_eventListeners.ContainsKey(eventName))
             m_eventListeners[eventName] -= listener;
