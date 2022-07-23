@@ -9,7 +9,7 @@ public class PlayerAnimatorController : NestedComponent
 
     private IEventsManager m_eventsManager;
     private Animator m_animator;
-    private PlayerPhysics2DHandler m_playerPhysics2DHandler;
+    private ObjectPhysics2DState m_physics2DState;
 
     private float m_velocityX;
     private float m_velocityY;
@@ -24,10 +24,10 @@ public class PlayerAnimatorController : NestedComponent
     private void Start()
     {
         m_animator = GetComponent<Animator>();
-        m_playerPhysics2DHandler = GetComponentInRoot<PlayerPhysics2DHandler>();
+        m_physics2DState = GetComponentInRoot<ObjectPhysics2DState>();
 
-        m_playerPhysics2DHandler.IsGrounded.AddChangedListener(OnGroundedChanged);
-        m_playerPhysics2DHandler.Velocity.AddChangedListener(OnVelocityChanged);
+        m_physics2DState.IsGrounded.AddChangedListener(OnGroundedChanged);
+        m_physics2DState.Velocity.AddChangedListener(OnVelocityChanged);
     }
 
     private void OnVelocityChanged(SimpleValueBase value)
@@ -60,7 +60,7 @@ public class PlayerAnimatorController : NestedComponent
 
     public void OnJumpStart()
     {
-        if (m_playerPhysics2DHandler.IsGrounded.Value)
+        if (m_physics2DState.IsGrounded.Value)
             return;
 
         m_eventsManager.CallEvent(PlayerObjectEvents.OnJumpStart, transform.parent.position);
@@ -68,7 +68,7 @@ public class PlayerAnimatorController : NestedComponent
 
     public void OnJumpEnd()
     {
-        if (!m_playerPhysics2DHandler.IsGrounded.Value)
+        if (!m_physics2DState.IsGrounded.Value)
             return;
 
         m_eventsManager.CallEvent(PlayerObjectEvents.OnJumpEnd, transform.parent.position);
