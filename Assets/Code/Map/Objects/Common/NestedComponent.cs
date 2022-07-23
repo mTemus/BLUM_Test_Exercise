@@ -2,7 +2,7 @@
 
 public abstract class NestedComponent : MonoBehaviour
 {
-    protected T GetComponentFromRoot<T>()
+    public T GetComponentFromRoot<T>()
     {
         var component = gameObject.transform.parent.GetComponent<T>();
 
@@ -13,7 +13,7 @@ public abstract class NestedComponent : MonoBehaviour
         return default;
     }
     
-    protected T GetComponentInRoot<T>()
+    public T GetComponentInRoot<T>()
     {
         var component = gameObject.transform.parent.GetComponentInChildren<T>();
 
