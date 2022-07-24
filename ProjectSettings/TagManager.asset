@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Platform
+  - Enemy
+  - Neutral
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -13,7 +16,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -28,7 +31,7 @@ TagManager:
   - 
   - Platform
   - Floor
-  - 
+  - Environment
   - 
   - 
   - 

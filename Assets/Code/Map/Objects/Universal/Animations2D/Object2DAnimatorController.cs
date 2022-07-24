@@ -2,14 +2,12 @@
 
 public class Object2DAnimatorController : NestedComponent
 {
-    public interface AnimationEndListener
-    {
-        void OnAnimationEnded();
-    }
-
     public const string VelocityXParameterName = "VelocityX";
     public const string VelocityYParameterName = "VelocityY";
     public const string IsGroundedParameterName = "IsGrounded";
+    public const string IsAttackingTriggerName = "IsAttacking";
+    public const string GetHitTriggerName = "GetHit";
+    public const string DieHitTriggerName = "Die";
 
     [SerializeField] 
     private bool UpdateVelocity = true;
@@ -23,21 +21,18 @@ public class Object2DAnimatorController : NestedComponent
     [SerializeField] 
     private bool UpdateHealth = true;
 
-    private AnimationEndListener m_listener = null;
     protected Animator m_animator;
     protected ObjectPhysics2DState m_physics2DState;
 
     private float m_velocityX;
     private bool m_isGrounded;
-    private bool m_animStarted = true;
-    private bool m_animFinished = true;
-
-    private int m_currAnimNameHash = 0;
 
     private void Start()
     {
         m_animator = GetComponent<Animator>();
         m_physics2DState = GetComponentInRoot<ObjectPhysics2DState>();
+
+        GetComponentFromRoot<ObjectEventsContainer>().SubscribeToEvent(ObjectEvents.BeforeObjectDeath, OnDeathStart);
 
         if (UpdateVelocity)
             m_physics2DState.Velocity.AddChangedListener(OnVelocityChanged);
@@ -45,7 +40,28 @@ public class Object2DAnimatorController : NestedComponent
         if (UpdateIsGrounded)
             m_physics2DState.IsGrounded.AddChangedListener(OnGroundedChanged);
 
+        if (UpdateAttacking)
+            GetComponentInRoot<ObjectAttackState>().IsAttacking.AddChangedListener(OnAttackingChanged, false);
+
+        if (UpdateHealth)
+            GetComponentInRoot<ObjectHealthState>().Health.AddChangedListener(OnGetHit, false);
+
         enabled = false;
+    }
+
+    private void OnDeathStart(string eventName, object data)
+    {
+        m_animator.SetTrigger(DieHitTriggerName);
+    }
+
+    private void OnGetHit(SimpleValueBase obj)
+    {
+        m_animator.SetTrigger(GetHitTriggerName);
+    }
+
+    private void OnAttackingChanged(SimpleValueBase value)
+    {
+        m_animator.SetTrigger(IsAttackingTriggerName);
     }
 
     protected virtual void OnVelocityChanged(SimpleValueBase value)
@@ -70,48 +86,8 @@ public class Object2DAnimatorController : NestedComponent
         m_isGrounded = isGrounded;
     }
 
-    public void PlayAnimation(string animFullPath, AnimationEndListener listener, float speed = 1f)
+    public void OnDeath()
     {
-        m_animator.Play(animFullPath, 0, 0.0f);
-        PerformPlayAnimCommon(animFullPath, listener, speed);
-    }
-
-    private void PerformPlayAnimCommon(string animFullPath, AnimationEndListener listener, float speed)
-    {
-        m_listener = listener;
-
-        m_currAnimNameHash = Animator.StringToHash(animFullPath);
-        enabled = true;
-        m_animStarted = false;
-        m_animFinished = false;
-
-        m_animator.speed *= speed;
-    }
-
-    private void Update()
-    {
-        var animInfo = m_animator.GetCurrentAnimatorStateInfo(0);
-
-        if (animInfo.fullPathHash == m_currAnimNameHash)
-        {
-            m_animStarted = true;
-
-            if (animInfo.normalizedTime >= 1.0f)
-                m_animFinished = true;
-        }
-        else
-        {
-            if (m_animStarted)
-                m_animFinished = true;
-        }
-
-        if (!m_animFinished) 
-            return;
-
-        m_animator.speed = 1.0f;
-
-        enabled = false;
-
-        m_listener?.OnAnimationEnded();
+        GetComponentFromRoot<ObjectEventsContainer>().CallEvent(ObjectEvents.OnObjectDeath, transform.parent.gameObject);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerPlatformFallController : NestedComponent
+public class PlayerPlatformFallHandler : NestedComponent
 {
     public string FallActionName;
 

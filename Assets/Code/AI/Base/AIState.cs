@@ -5,9 +5,9 @@ public enum AIStateType
     Idle = 1,
     Patrol = 2,
     Attack = 3,
-    Chasing = 4,
-    Wandering = 5,
-    Dying = 6,
+    Chase = 4,
+    Wander = 5,
+    Die = 6,
     Count
 }
 

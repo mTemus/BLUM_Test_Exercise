@@ -9,6 +9,8 @@ public class MushroomAIController : ObjectAIController
 
     protected override void CreateObjectAI()
     {
+        base.CreateObjectAI();
+
         var patrolPackage = new PatrolAIState.PatrolAIStatePackage
         {
             PatrolPoints = PatrolPoints.Select(point => point.transform.position).ToList(),
@@ -16,11 +18,17 @@ public class MushroomAIController : ObjectAIController
             Controller = this
         };
 
+        var diePackage = new DieAIState.DieAIStatePackage
+        {
+            Controller = this
+        };
+
         AIState patrol = new PatrolAIState(patrolPackage);
 
         m_aiStates = new List<AIState>
         {
-            patrol
+            patrol, 
+            new DieAIState(diePackage)
         };
 
         m_currentAIState = patrol;

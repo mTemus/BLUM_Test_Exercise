@@ -7,14 +7,23 @@ public abstract class ObjectAIController : NestedComponent
     protected List<AIState> m_aiStates;
     protected AIState m_currentAIState;
 
-    protected abstract void CreateObjectAI();
+    protected virtual void CreateObjectAI()
+    {
+        GetComponentFromRoot<ObjectEventsContainer>().SubscribeToEvent(AIEvents.OnStateChangeRequest, OnStateChangeRequest);
+    }
+
+    private void OnStateChangeRequest(string eventName, object data)
+    {
+        var newState = (AIStateType)data;
+        SetNewAIState(newState);
+    }
 
     protected void HandleState()
     {
         m_currentAIState.Update(this);
     }
 
-    public void SetNewAIState(AIStateType stateType)
+    private void SetNewAIState(AIStateType stateType)
     {
         var state = m_aiStates.FirstOrDefault(state => state.AIStateType == stateType);
 

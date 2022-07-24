@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerJumpController : NestedComponent
+public class PlayerJumpHandler : NestedComponent
 {
     public string JumpActionName;
 
