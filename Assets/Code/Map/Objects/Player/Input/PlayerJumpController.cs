@@ -14,9 +14,8 @@ public class PlayerJumpController : NestedComponent
     void Awake()
     {
         m_rigidbody2D = GetComponentFromRoot<Rigidbody2D>();
-        var playerInput = GetComponentInRoot<PlayerInput>();
 
-        playerInput.actions.FindAction(JumpActionName).performed += Jump;
+        GetComponentInRoot<PlayerInput>().actions.FindAction(JumpActionName).performed += Jump;
     }
 
     private void Jump(InputAction.CallbackContext context)
