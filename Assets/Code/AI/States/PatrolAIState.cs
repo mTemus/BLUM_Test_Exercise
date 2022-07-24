@@ -25,6 +25,9 @@ public class PatrolAIState : AIState
 
     public override void Update(ObjectAIController controller)
     {
+        if (m_patrolPoints.Count == 0)
+            return;
+
         if (!m_movement.MoveOnXTo(m_patrolSpeed))
         {
             
@@ -42,6 +45,9 @@ public class PatrolAIState : AIState
 
     public override void OnStateSet()
     {
+        if (m_patrolPoints.Count == 0)
+            return;
+
         m_movement.PrepareToMoveOnXTo(m_patrolPoints[m_currentPointIndex].x);
     }
 

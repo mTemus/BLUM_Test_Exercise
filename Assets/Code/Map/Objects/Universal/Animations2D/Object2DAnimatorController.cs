@@ -12,10 +12,16 @@ public class Object2DAnimatorController : NestedComponent
     public const string IsGroundedParameterName = "IsGrounded";
 
     [SerializeField] 
-    private readonly bool UpdateVelocity = true;
+    private bool UpdateVelocity = true;
+
+    [SerializeField]
+    private bool UpdateAttacking = true;
 
     [SerializeField] 
-    private readonly bool UpdateIsGrounded = true;
+    private bool UpdateIsGrounded = true;
+    
+    [SerializeField] 
+    private bool UpdateHealth = true;
 
     private AnimationEndListener m_listener = null;
     protected Animator m_animator;
@@ -51,7 +57,6 @@ public class Object2DAnimatorController : NestedComponent
             m_animator.SetFloat(VelocityXParameterName, Mathf.Abs(velocity.x));
             m_velocityX = velocity.x;
         }
-
     }
 
     private void OnGroundedChanged(SimpleValueBase value)
