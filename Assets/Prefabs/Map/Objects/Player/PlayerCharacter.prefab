@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 859628984}
   - component: {fileID: 859628985}
   - component: {fileID: 859628986}
+  - component: {fileID: 711063463853469975}
   m_Layer: 6
   m_Name: Physics
   m_TagString: Untagged
@@ -73,6 +74,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12091e330c5ee504b8381464d27a9a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &711063463853469975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270659941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e64710c6d4c8eaa4ea4f3a0633487751, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  m_knockbackDuration: 0.3
+  m_knockbackVelocityX: 4
+  m_knockbackVelocityY: 2
 --- !u!1 &108259749855783639
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,8 @@ public class PlayerInputController : NestedComponent
 {
     private PlayerInput m_playerInput;
 
+    private int m_blockCounter;
+
     private void Awake()
     {
         m_playerInput = GetComponent<PlayerInput>();
@@ -13,7 +15,10 @@ public class PlayerInputController : NestedComponent
 
     public void BlockInput()
     {
-        BlockInputForTimeInternal();
+        m_blockCounter++;
+
+        if (m_playerInput.currentActionMap.enabled)
+            m_playerInput.currentActionMap.Disable();
     }
 
     public void BlockInputForTime(float time)
@@ -23,15 +28,18 @@ public class PlayerInputController : NestedComponent
 
     private void BlockInputForTimeInternal(float time = 0f)
     {
+        m_blockCounter++;
         m_playerInput.currentActionMap.Disable();
 
-        if (time > 0)
-            StartCoroutine(UnblockInputAfterTime(time));
+        StartCoroutine(UnblockInputAfterTime(time));
     }
 
     public void UnblockInput()
     {
-        m_playerInput.currentActionMap.Enable();
+        m_blockCounter--;
+
+        if (m_blockCounter == 0)
+            m_playerInput.currentActionMap.Enable();
     }
 
     private IEnumerator UnblockInputAfterTime(float time)
