@@ -3,6 +3,8 @@ using Zenject;
 
 public class PlayerAnimatorController : Object2DAnimatorController
 {
+    public const string IsPlayerDyingParameterName = "IsDying";
+
     private IEventsManager m_eventsManager;
     private float m_velocityY;
 
@@ -10,6 +12,21 @@ public class PlayerAnimatorController : Object2DAnimatorController
     private void Construct(IEventsManager eventsManager)
     {
         m_eventsManager = eventsManager;
+    }
+
+    protected override void StartInternal()
+    {
+        m_eventsManager.SubscribeToEvent(PlayerObjectEvents.BeforePlayerDeath, BeforePlayerDeath);
+    }
+
+    public override void OnDeath()
+    {
+        m_eventsManager.CallEvent(PlayerObjectEvents.OnPlayerDeath, transform.parent.gameObject);
+    }
+
+    private void BeforePlayerDeath(string eventName, object data)
+    {
+        m_animator.SetBool(IsPlayerDyingParameterName, true);
     }
 
     protected override void OnVelocityChanged(SimpleValueBase value)
@@ -41,4 +58,6 @@ public class PlayerAnimatorController : Object2DAnimatorController
 
         m_eventsManager.CallEvent(PlayerObjectEvents.OnJumpEnd, transform.parent.position);
     }
+
+    
 }

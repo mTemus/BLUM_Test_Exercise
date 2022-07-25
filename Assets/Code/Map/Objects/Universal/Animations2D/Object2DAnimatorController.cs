@@ -47,7 +47,10 @@ public class Object2DAnimatorController : NestedComponent
             GetComponentInRoot<ObjectHealthState>().Health.AddChangedListener(OnGetHit, false);
 
         enabled = false;
+        StartInternal();
     }
+
+    protected virtual void StartInternal() {}
 
     private void OnDeathStart(string eventName, object data)
     {
@@ -86,7 +89,7 @@ public class Object2DAnimatorController : NestedComponent
         m_isGrounded = isGrounded;
     }
 
-    public void OnDeath()
+    public virtual void OnDeath()
     {
         GetComponentFromRoot<ObjectEventsContainer>().CallEvent(ObjectEvents.OnObjectDeath, transform.parent.gameObject);
     }

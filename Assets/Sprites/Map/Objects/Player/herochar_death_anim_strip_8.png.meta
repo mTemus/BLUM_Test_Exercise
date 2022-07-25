@@ -283,6 +283,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: herochar_death_anim_strip_8_8
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 16
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5eb4915465225754d890a932533e19cf
+      internalID: -2118683269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -301,6 +322,7 @@ TextureImporter:
       herochar_death_anim_strip_8_5: 841293098
       herochar_death_anim_strip_8_0: -1643823130
       herochar_death_anim_strip_8_1: 1366206591
+      herochar_death_anim_strip_8_8: -2118683269
       herochar_death_anim_strip_8_3: 659216326
   spritePackingTag: 
   pSDRemoveMatte: 0
