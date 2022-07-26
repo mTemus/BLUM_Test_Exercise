@@ -27,7 +27,7 @@ public class PlayerKnockbackHandler : NestedComponent
         if (1 << enemyCollider.gameObject.layer != m_enemyLayer.value)
             return;
 
-        if (m_knockbackCounter > 0)
+        if (enabled)
             return;
         
         var enemy = enemyCollider.gameObject;

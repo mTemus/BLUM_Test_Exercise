@@ -2,7 +2,7 @@
 {
     public int BaseHealth = 1;
 
-    public SimpleValue<int> Health = new SimpleValue<int>(true, 1);
+    public SimpleValue<int> Health = new SimpleValue<int>(false, 1);
 
     private void Awake()
     {
@@ -13,6 +13,8 @@
     {
         if (BaseHealth != 0)
             Health.Value = BaseHealth;
+
+        Health.CallingEventsEnabled = true;
     }
 
 }

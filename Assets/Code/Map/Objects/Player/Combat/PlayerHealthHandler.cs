@@ -8,6 +8,7 @@ public class PlayerHealthHandler : ObjectHealthHandler
 
     protected override void Die()
     {
+        GetComponentFromRoot<BoxCollider2D>().enabled = false;
         GetComponentInRoot<PlayerInputController>().BlockInput();
         m_eventsManager.CallEvent(PlayerObjectEvents.BeforePlayerDeath, null);
     }
