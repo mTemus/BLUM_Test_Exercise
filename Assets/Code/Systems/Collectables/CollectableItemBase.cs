@@ -22,7 +22,7 @@ public abstract class CollectableItemBase : MonoBehaviour
         Manager = manager;
     }
 
-    public virtual void Collect()
+    public virtual void Collect(GameObject collector)
     {
         Manager.OnItemCollected(this);
     }
