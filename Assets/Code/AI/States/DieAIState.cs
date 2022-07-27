@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class DieAIState : AIState
+﻿public class DieAIState : AIState
 {
     public class DieAIStatePackage : AIStatePackage { }
 

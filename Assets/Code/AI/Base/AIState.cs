@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public enum AIStateType
+﻿public enum AIStateType
 {
     Idle = 1,
     Patrol = 2,

@@ -263,6 +263,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   PatrolSpeed: 2
+  IsHurtDuration: 0
 --- !u!114 &3722908458079497739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,7 +443,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3722908458975940555}
   - component: {fileID: 3722908458975940557}
-  - component: {fileID: 3722908458975940554}
+  - component: {fileID: 3102210327258147175}
   m_Layer: 7
   m_Name: Health
   m_TagString: Untagged
@@ -478,7 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BaseHealth: 2
---- !u!114 &3722908458975940554
+--- !u!114 &3102210327258147175
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -487,6 +488,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3722908458975940552}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 810e9895af84ee240870671a2ddec502, type: 3}
+  m_Script: {fileID: 11500000, guid: 303de562625e3c74186665bddd7425fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
