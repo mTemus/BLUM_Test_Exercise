@@ -8,6 +8,7 @@ public enum AIStateType
     Chase = 4,
     Wander = 5,
     Die = 6,
+    IsHurt = 7,
     Count
 }
 

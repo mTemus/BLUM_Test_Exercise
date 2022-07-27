@@ -18,7 +18,11 @@
 
         if (health <= 0)
             Die();
+        else
+            GetHurtInternal();
     }
+
+    protected virtual void GetHurtInternal() { }
 
     protected virtual void Die()
     {

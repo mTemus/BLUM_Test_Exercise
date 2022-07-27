@@ -6,6 +6,7 @@ public class MushroomAIController : ObjectAIController
 {
     public List<GameObject> PatrolPoints;
     public float PatrolSpeed;
+    public float IsHurtDuration;
 
     protected override void CreateObjectAI()
     {
@@ -23,12 +24,19 @@ public class MushroomAIController : ObjectAIController
             Controller = this
         };
 
+        var isHurtPackage = new IsHurtAIState.IsHurtAIStatePackage
+        { 
+            Controller = this,
+            StateTime = IsHurtDuration
+        };
+
         AIState patrol = new PatrolAIState(patrolPackage);
 
         m_aiStates = new List<AIState>
         {
             patrol, 
-            new DieAIState(diePackage)
+            new DieAIState(diePackage),
+            new IsHurtAIState(isHurtPackage)
         };
 
         m_currentAIState = patrol;
