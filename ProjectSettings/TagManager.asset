@@ -29,10 +29,10 @@ TagManager:
   - 
   - 
   - Collectable
-  - Platform
+  - PlayerPlatform
   - Floor
   - Environment
-  - 
+  - WorldPlatform
   - 
   - 
   - 
