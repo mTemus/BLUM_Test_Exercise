@@ -4,11 +4,11 @@ public class ChaseAIState : AIState
 {
     public class ChaseAIStatePackage : AIStatePackage
     {
-        public TriggerAreaChasingHandler TriggerHandler;
+        public ObjectAITriggerAreaHandler TriggerHandler;
         public float ChasingSpeed;
     }
 
-    private readonly TriggerAreaChasingHandler m_triggerHandler;
+    private readonly ObjectAITriggerAreaHandler m_triggerHandler;
     private GameObject m_target;
     private readonly float m_chasingSpeed;
     private readonly ObjectMovement2DController m_movement;

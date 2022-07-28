@@ -123,6 +123,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   Target: {fileID: 0}
+  OnTriggerEnterState: 4
+  OnTriggerExitState: 2
 --- !u!1 &3168150891197517322
 GameObject:
   m_ObjectHideFlags: 0

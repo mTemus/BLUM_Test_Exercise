@@ -36,7 +36,7 @@ public class MeleeGoblinAIController : ObjectAIController
         {
             Controller = this,
             ChasingSpeed = ChasingSpeed,
-            TriggerHandler = GetComponentInRoot<TriggerAreaChasingHandler>(),
+            TriggerHandler = GetComponentInRoot<ObjectAITriggerAreaHandler>(),
         };
 
         var attackPackage = new AttackAIState.AttackAIStatePackage

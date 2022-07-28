@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerAreaChasingHandler : NestedComponent
+public class ObjectAITriggerAreaHandler : NestedComponent
 {
     public List<OnDistanceLostAIStateSwitch> AiStateSwitches;
 
@@ -11,13 +11,16 @@ public class TriggerAreaChasingHandler : NestedComponent
     [HideInInspector]
     public GameObject Target;
 
+    public AIStateType OnTriggerEnterState;
+    public AIStateType OnTriggerExitState;
+
     private void OnTriggerEnter2D(Collider2D trigger)
     {
         if (1 << trigger.gameObject.layer != TargetLayerMask.value)
             return;
 
         Target = trigger.gameObject;
-        GetComponentFromRoot<ObjectEventsContainer>().CallEvent(AIEvents.OnStateChangeRequest, AIStateType.Chase);
+        GetComponentFromRoot<ObjectEventsContainer>().CallEvent(AIEvents.OnStateChangeRequest, OnTriggerEnterState);
 
         var data = CreateDistanceData();
 
@@ -45,7 +48,7 @@ public class TriggerAreaChasingHandler : NestedComponent
             return;
 
         Target = null;
-        GetComponentFromRoot<ObjectEventsContainer>().CallEvent(AIEvents.OnStateChangeRequest, AIStateType.Patrol);
+        GetComponentFromRoot<ObjectEventsContainer>().CallEvent(AIEvents.OnStateChangeRequest, OnTriggerExitState);
     }
 
     private OnDistanceLostAIStateSwitch.DistanceData CreateDistanceData()
