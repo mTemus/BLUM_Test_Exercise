@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class HUDHeart : MonoBehaviour
 {
-    [HideInInspector] 
-    public bool IsBase;
     private Animator m_animator;
     private HUDHeartsController m_controller;
 
@@ -13,24 +11,15 @@ public class HUDHeart : MonoBehaviour
         m_animator = GetComponent<Animator>();
     }
 
-    public void InitializeAsBase()
-    {
-        IsBase = true;
-    }
-
     public void InitializeAsPooled()
     {
         m_animator.Rebind();
-    }
-
-    public void RestoreHeart()
-    {
         m_animator.Play("GainHeart", 0);
     }
 
-    public void LoseHeart()
+    public void Lose()
     {
-        m_animator.Play(IsBase ? "LoseHeartBase" : "LoseHeart", 0);
+        m_animator.Play("LoseHeart", 0);
     }
 
     public void OnHeartLost()

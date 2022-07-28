@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -7,9 +8,10 @@ public class HUDHeartsController : MonoBehaviour
 {
     public HUDHeart HeartPrefab;
     public Transform HeartsTransform;
-    
+    public TextMeshProUGUI AdditionalHeartsCounter;
+    public int MaxVisibleHearts;
+
     private int m_currentHeartCounter;
-    private int m_baseHearts;
     private List<HUDHeart> m_hearts;
 
     [Inject]
@@ -18,15 +20,8 @@ public class HUDHeartsController : MonoBehaviour
         m_hearts = new List<HUDHeart>();
 
         for (var i = 0; i < playerHealthState.BaseHealth; i++)
-        {
-            var heart = Instantiate(HeartPrefab, HeartsTransform);
-            heart.InitializeAsNew(this);
-            heart.InitializeAsBase();
-            m_hearts.Add(heart);
-        }
+            AddHeart();
 
-        m_baseHearts = playerHealthState.BaseHealth;
-        m_currentHeartCounter = m_baseHearts - 1;
         playerHealthState.Health.AddChangedListener(OnHealthChanged, false);
     }
 
@@ -42,19 +37,23 @@ public class HUDHeartsController : MonoBehaviour
 
     private void RemoveHeart()
     {
-        m_hearts[m_currentHeartCounter].LoseHeart();
+        if (m_currentHeartCounter < MaxVisibleHearts - 1)
+        {
+            m_hearts[m_currentHeartCounter].Lose();
+        }
+        else
+        {
+            var additionalHearts = m_currentHeartCounter - MaxVisibleHearts - 1;
+
+        }
         m_currentHeartCounter--;
     }
 
     private void AddHeart()
     {
-        if (m_currentHeartCounter - 1 < m_baseHearts - 1)
+        if (m_currentHeartCounter < MaxVisibleHearts)
         {
-            m_hearts[m_currentHeartCounter].RestoreHeart();
-        }
-        else
-        {
-            var heart = m_hearts.FirstOrDefault(heart => heart.gameObject.activeSelf);
+            var heart = m_hearts.FirstOrDefault(heart => !heart.gameObject.activeSelf);
 
             if (heart == null)
             {
@@ -65,7 +64,20 @@ public class HUDHeartsController : MonoBehaviour
             else
             {
                 heart.InitializeAsPooled();
+                heart.gameObject.SetActive(true);
             }
+        }
+        else
+        {
+            var additionalHearts = m_currentHeartCounter - MaxVisibleHearts;
+
+            if (additionalHearts == 0)
+            {
+                AdditionalHeartsCounter.transform.SetSiblingIndex(MaxVisibleHearts);
+                AdditionalHeartsCounter.gameObject.SetActive(true);
+            }
+
+            AdditionalHeartsCounter.text = $"+{++additionalHearts}";
         }
 
         m_currentHeartCounter++;
@@ -73,7 +85,6 @@ public class HUDHeartsController : MonoBehaviour
 
     public void OnHeartRemoved(HUDHeart heart)
     {
-        if (!heart.IsBase)
-            heart.gameObject.SetActive(false);
+        heart.gameObject.SetActive(false);
     }
 }
