@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 859628985}
   - component: {fileID: 859628986}
   - component: {fileID: 711063463853469975}
+  - component: {fileID: 1014282960}
   m_Layer: 6
   m_Name: Physics
   m_TagString: Untagged
@@ -92,6 +93,21 @@ MonoBehaviour:
   m_knockbackDuration: 0.3
   m_knockbackVelocityX: 4
   m_knockbackVelocityY: 2
+--- !u!114 &1014282960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270659941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19294006627b1bd4995a6892e0f5dc2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_collectableMask:
+    serializedVersion: 2
+    m_Bits: 524288
 --- !u!1 &108259749855783639
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,7 +573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ecfefe68e8e934c98636c08dd731e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseHealth: 3
+  BaseHealth: 99
 --- !u!114 &6169069269835342144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,6 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c8c177a3cc343479d3539d3a0bad3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HurtCooldownInSeconds: 5
 --- !u!1 &4182341503251928390
 GameObject:
   m_ObjectHideFlags: 0
