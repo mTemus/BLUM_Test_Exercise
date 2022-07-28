@@ -13,6 +13,9 @@ public class ObjectItemDropHandler : NestedComponent
 
         [Range(0, 100)]
         public float Chance;
+
+        public int MinAmount;
+        public int MaxAmount;
     }
 
     public List<ItemToDrop> Items;
@@ -34,13 +37,18 @@ public class ObjectItemDropHandler : NestedComponent
             if (!(chance <= item.Chance)) 
                 continue;
 
-            var package = new CollectableItemBase.CollectableSpawnPackage
-            {
-                Type = item.Type,
-                SpawnPoint = transform.parent.position
-            };
+            var amount = Random.Range(item.MinAmount, item.MaxAmount);
 
-            m_eventsManager.CallEvent(WorldEvents.OnCollectableItemSpawnRequest, package);
+            for (var i = 0; i < amount; i++)
+            {
+                var package = new CollectableItemBase.CollectableSpawnPackage
+                {
+                    Type = item.Type,
+                    SpawnPoint = transform.parent.position
+                };
+
+                m_eventsManager.CallEvent(WorldEvents.OnCollectableItemSpawnRequest, package);
+            }
         }
     }
 }
