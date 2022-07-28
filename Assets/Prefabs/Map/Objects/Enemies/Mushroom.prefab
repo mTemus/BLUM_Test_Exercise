@@ -263,7 +263,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   PatrolSpeed: 2
-  IsHurtDuration: 0
+  IsHurtDuration: 0.2
 --- !u!114 &3722908458079497739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,7 +361,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3722908458187916919}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.6, z: 0.039885327}
+  m_LocalPosition: {x: 0, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -420,7 +420,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.3412385}
+  m_Offset: {x: 0.00082346797, y: 0.34332263}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -431,7 +431,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5506191, y: 0.689816}
+  m_Size: {x: 0.49909925, y: 0.6856477}
   m_EdgeRadius: 0
 --- !u!1 &3722908458975940552
 GameObject:
