@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class MushroomAIController : ObjectAIController
+public class MeleeGoblinAIController : ObjectAIController
 {
     public List<GameObject> PatrolPoints;
     public float PatrolSpeed;
+    public float ChasingSpeed;
     public float IsHurtDuration;
+    public float AttackCooldown;
 
     protected override void CreateObjectAI()
     {
@@ -25,21 +27,34 @@ public class MushroomAIController : ObjectAIController
         };
 
         var isHurtPackage = new IsHurtAIState.IsHurtAIStatePackage
-        { 
+        {
             Controller = this,
             StateTime = IsHurtDuration
         };
 
-        AIState patrol = new PatrolAIState(patrolPackage);
+        var chasePackage = new ChaseAIState.ChaseAIStatePackage
+        {
+            Controller = this,
+            ChasingSpeed = ChasingSpeed,
+            TriggerHandler = GetComponentInRoot<TriggerAreaChasingHandler>(),
+        };
+
+        var attackPackage = new AttackAIState.AttackAIStatePackage
+        {
+            Controller = this,
+            AttackCooldown = AttackCooldown,
+        };
 
         m_aiStates = new List<AIState>
         {
-            patrol, 
+            new PatrolAIState(patrolPackage),
             new DieAIState(diePackage),
-            new IsHurtAIState(isHurtPackage)
+            new IsHurtAIState(isHurtPackage),
+            new ChaseAIState(chasePackage),
+            new AttackAIState(attackPackage),
         };
 
-        CurrentAIState.Value = patrol;
+        CurrentAIState.Value = m_aiStates[0];
         CurrentAIState.Value.OnStateSet();
     }
 

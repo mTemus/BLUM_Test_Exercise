@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class ObjectAIController : NestedComponent
 {
+    public SimpleValue<AIState> CurrentAIState = new SimpleValue<AIState>(true);
     protected List<AIState> m_aiStates;
-    protected AIState m_currentAIState;
     protected AIStateType m_previousAIState;
 
     protected virtual void CreateObjectAI()
@@ -28,7 +28,7 @@ public abstract class ObjectAIController : NestedComponent
 
     protected void HandleState()
     {
-        m_currentAIState.Update(this);
+        CurrentAIState.Value.Update(this);
     }
 
     private void SetNewAIState(AIStateType stateType)
@@ -43,11 +43,11 @@ public abstract class ObjectAIController : NestedComponent
 
         var eventsContainer = GetComponentFromRoot<ObjectEventsContainer>();
         
-        eventsContainer.CallEvent(AIEvents.BeforeStateChanged, m_currentAIState);
-        m_currentAIState.OnStateChanged();
-        m_previousAIState = m_currentAIState.AIStateType;
-        m_currentAIState = state;
-        m_currentAIState.OnStateSet();
+        eventsContainer.CallEvent(AIEvents.BeforeStateChanged, CurrentAIState);
+        CurrentAIState.Value.OnStateChanged();
+        m_previousAIState = CurrentAIState.Value.AIStateType;
+        CurrentAIState.Value = state;
+        CurrentAIState.Value.OnStateSet();
         eventsContainer.CallEvent(AIEvents.AfterStateChanged, state);
     }
 }
