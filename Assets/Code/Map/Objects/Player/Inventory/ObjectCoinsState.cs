@@ -1,4 +1,4 @@
-public class PlayerCoinsState : NestedComponent
+public class ObjectCoinsState : NestedComponent
 {
     public int StartCoins = 0;
 

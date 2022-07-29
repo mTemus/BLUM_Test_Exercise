@@ -7,7 +7,7 @@ public class HUDCoinsController : MonoBehaviour
     public TextMeshProUGUI CoinsCount;
 
     [Inject]
-    private void Construct(PlayerCoinsState playerCoinsState)
+    private void Construct(ObjectCoinsState playerCoinsState)
     {
         playerCoinsState.Coins.AddChangedListener(OnCoinsCountChanged);
     }
