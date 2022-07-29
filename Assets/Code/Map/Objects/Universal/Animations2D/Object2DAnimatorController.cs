@@ -26,6 +26,7 @@ public class Object2DAnimatorController : NestedComponent
 
     private float m_velocityX;
     private bool m_isGrounded;
+    private int m_healthPoints;
 
     private void Start()
     {
@@ -44,7 +45,11 @@ public class Object2DAnimatorController : NestedComponent
             GetComponentInRoot<ObjectAttackState>().IsAttacking.AddChangedListener(OnAttackingChanged, false);
 
         if (UpdateHealth)
-            GetComponentInRoot<ObjectHealthState>().Health.AddChangedListener(OnGetHit, false);
+        {
+            var healthState = GetComponentInRoot<ObjectHealthState>();
+            m_healthPoints = healthState.Health.Value;
+            healthState.Health.AddChangedListener(OnGetHit, false);
+        }
 
         enabled = false;
         StartInternal();
@@ -57,9 +62,14 @@ public class Object2DAnimatorController : NestedComponent
         m_animator.SetTrigger(DieHitTriggerName);
     }
 
-    private void OnGetHit(SimpleValueBase obj)
+    private void OnGetHit(SimpleValueBase value)
     {
-        m_animator.SetTrigger(GetHitTriggerName);
+        var health = value.GetValueAs<int>();
+
+        if (health < m_healthPoints)
+            m_animator.SetTrigger(GetHitTriggerName);
+
+        m_healthPoints = health;
     }
 
     private void OnAttackingChanged(SimpleValueBase value)
