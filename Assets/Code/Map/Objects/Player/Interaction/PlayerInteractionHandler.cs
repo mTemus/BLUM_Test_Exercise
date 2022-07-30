@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class PlayerInteractionHandler : ObjectInteractionHandler
 {
-    public GameObject InteractionSymbol;
+    public InteractionInputEffectHandler InteractionSymbol;
 
     protected override void OnSelectInternal()
     {
-        InteractionSymbol.SetActive(true);
+        InteractionSymbol.Show();
     }
 
     protected override void OnDeselectInternal()
     {
-        InteractionSymbol.SetActive(false);
+        InteractionSymbol.Hide();
     }
 }
