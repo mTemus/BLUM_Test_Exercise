@@ -70,6 +70,9 @@ public class InteractionInputEffectHandler : MonoBehaviour
 
     private void PlaySymbol()
     {
+        if (!gameObject.activeSelf)
+            return;
+
         m_animator.Play(m_controller == InputControllerType.Keyboard ? "Keyboard" : "Gamepad");
     }
 }
