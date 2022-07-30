@@ -747,7 +747,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438b5e7d36845114ebf3144b46e0d2ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartCoins: 0
+  StartCoins: 5
 --- !u!1 &4706441696304056048
 GameObject:
   m_ObjectHideFlags: 0
