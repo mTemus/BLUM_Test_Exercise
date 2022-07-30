@@ -71,8 +71,8 @@ public class HUDHeartsController : MonoBehaviour
             }
             else
             {
-                heart.InitializeAsPooled();
                 heart.gameObject.SetActive(true);
+                heart.InitializeAsPooled();
             }
         }
         else
