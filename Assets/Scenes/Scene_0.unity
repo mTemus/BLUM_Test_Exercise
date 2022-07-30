@@ -7436,10 +7436,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCharacter
       objectReference: {fileID: 0}
-    - target: {fileID: 5444785168237568273, guid: 30dfd98d5c6d799488cdc4aeeca6766f, type: 3}
-      propertyPath: StartCoins
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30dfd98d5c6d799488cdc4aeeca6766f, type: 3}
 --- !u!114 &108259750125421529 stripped
@@ -7485,7 +7481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3450629748685806754, guid: 1738519ef05280b4090a61a11d4b1b81, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3450629748685806755, guid: 1738519ef05280b4090a61a11d4b1b81, type: 3}
       propertyPath: m_RootOrder
