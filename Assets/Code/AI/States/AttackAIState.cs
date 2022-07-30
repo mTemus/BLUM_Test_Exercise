@@ -20,7 +20,7 @@ public class AttackAIState : AIState
         m_attackState = package.Controller.GetComponentInRoot<ObjectAttackState>();
     }
 
-    public override void Update(ObjectAIController controller)
+    public override void Update(ObjectGenericAIController controller)
     {
         if (m_cooldownCounter <= m_attackCooldown)
         {

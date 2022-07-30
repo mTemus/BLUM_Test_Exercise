@@ -22,7 +22,7 @@ public class IsHurtAIState : AIState
         m_rigidbody2D = package.Controller.GetComponentFromRoot<Rigidbody2D>();
     }
 
-    public override void Update(ObjectAIController controller)
+    public override void Update(ObjectGenericAIController controller)
     {
         if (m_timeCounter >= m_stateTime)
             m_eventsContainer.CallEvent(AIEvents.OnGoBackToPreviousStateRequest, null);

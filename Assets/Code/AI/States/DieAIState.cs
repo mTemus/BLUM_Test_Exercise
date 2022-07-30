@@ -2,7 +2,7 @@
 {
     public class DieAIStatePackage : AIStatePackage { }
 
-    private ObjectAIController m_aiController;
+    private ObjectGenericAIController m_aiController;
 
     public DieAIState(AIStatePackage package) : base(package)
     {
@@ -10,7 +10,7 @@
         m_aiController = package.Controller;
     }
 
-    public override void Update(ObjectAIController controller)
+    public override void Update(ObjectGenericAIController controller)
     {
         
     }

@@ -2,17 +2,44 @@
 using System.Linq;
 using UnityEngine;
 
-public abstract class ObjectAIController : NestedComponent
+public class ObjectGenericAIController : NestedComponent
 {
     public SimpleValue<AIState> CurrentAIState = new SimpleValue<AIState>(true);
     protected List<AIState> m_aiStates;
     protected AIStateType m_previousAIState;
 
-    protected virtual void CreateObjectAI()
+    private void CreateObjectAI()
     {
         var objectEvents = GetComponentFromRoot<ObjectEventsContainer>();
         objectEvents.SubscribeToEvent(AIEvents.OnStateChangeRequest, OnStateChangeRequest);
         objectEvents.SubscribeToEvent(AIEvents.OnGoBackToPreviousStateRequest, SetPreviousAIStateBack);
+
+        var aiConstructors = GetComponentsInChildren<AIStateConstructorMono>();
+        m_aiStates = new List<AIState>();
+
+        foreach (var constructor in aiConstructors)
+        {
+            var aiState = constructor.Construct(this);
+
+            if (constructor.IsStartingState)
+            {
+                CurrentAIState.Value = aiState;
+                CurrentAIState.Value.OnStateSet();
+            }
+
+            m_aiStates.Add(aiState);
+            constructor.Clear();
+        }
+    }
+
+    private void Start()
+    {
+        CreateObjectAI();
+    }
+
+    private void FixedUpdate()
+    {
+        HandleState();
     }
 
     private void OnStateChangeRequest(string eventName, object data)

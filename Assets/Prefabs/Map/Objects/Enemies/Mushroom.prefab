@@ -1,5 +1,84 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &426658893
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 426658894}
+  - component: {fileID: 426658897}
+  - component: {fileID: 426658896}
+  - component: {fileID: 426658895}
+  m_Layer: 7
+  m_Name: States
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &426658894
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426658893}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3722908458079497737}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &426658897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426658893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65859e2235f273346b52bc6733a909f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsStartingState: 1
+  Patrol: 1
+  PatrolPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  PatrolSpeed: 2
+--- !u!114 &426658896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426658893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e822d788e60ae41af38ce8043ba41f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsStartingState: 0
+--- !u!114 &426658895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426658893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6502129f60595bd49a48347615daf033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsStartingState: 0
+  IsHurtDuration: 0.2
 --- !u!1 &982326830
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +171,8 @@ MonoBehaviour:
   Items:
   - Type: 0
     Chance: 100
+    MinAmount: 0
+    MaxAmount: 0
 --- !u!1 &3722908457876903554
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,8 +304,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3722908458079497737}
-  - component: {fileID: 3722908458079497736}
   - component: {fileID: 3722908458079497739}
+  - component: {fileID: 1035602392}
   m_Layer: 7
   m_Name: AI
   m_TagString: Untagged
@@ -243,27 +324,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 426658894}
   m_Father: {fileID: 3722908458187916918}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3722908458079497736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3722908458079497734}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ce860a0656a208459876f03ca1f2abb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PatrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  PatrolSpeed: 2
-  IsHurtDuration: 0.2
 --- !u!114 &3722908458079497739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +342,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: 5
+--- !u!114 &1035602392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3722908458079497734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ebe185862296c24faef81ea101ab994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3722908458082734770
 GameObject:
   m_ObjectHideFlags: 0
@@ -491,3 +568,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303de562625e3c74186665bddd7425fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HurtCooldownInSeconds: 0

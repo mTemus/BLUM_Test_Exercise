@@ -10,7 +10,7 @@ public abstract class AIStateSwitch : NestedComponent
 
     protected void Awake()
     {
-        GetComponent<ObjectAIController>().CurrentAIState.AddChangedListener(OnAIStateChanged);
+        GetComponent<ObjectGenericAIController>().CurrentAIState.AddChangedListener(OnAIStateChanged);
         m_conditionValue = !Condition;
         enabled = false;
     }

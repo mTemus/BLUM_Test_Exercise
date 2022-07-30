@@ -14,7 +14,7 @@ public abstract class AIState
 {
     public abstract class AIStatePackage
     {
-        public ObjectAIController Controller;
+        public ObjectGenericAIController Controller;
 
     }
 
@@ -22,7 +22,7 @@ public abstract class AIState
 
     public AIStateType AIStateType { get; protected set; }
 
-    public abstract void Update(ObjectAIController controller);
+    public abstract void Update(ObjectGenericAIController controller);
     public abstract void OnStateSet();
     public abstract void OnStateChanged();
 }

@@ -23,7 +23,7 @@ public class ChaseAIState : AIState
         m_movement = concretePackage.Controller.GetComponentInRoot<ObjectMovement2DController>();
     }
 
-    public override void Update(ObjectAIController controller)
+    public override void Update(ObjectGenericAIController controller)
     {
         m_movement.PrepareToMoveOnXTo(m_target.transform.position.x);
         m_movement.MoveOnXTo(m_chasingSpeed);

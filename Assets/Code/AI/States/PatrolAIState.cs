@@ -7,13 +7,18 @@ public class PatrolAIState : AIState
     {
         public List<Vector3> PatrolPoints;
         public float PatrolSpeed;
+        public bool Patrol;
     }
 
     public PatrolAIState(AIStatePackage package) : base(package)
     {
         var concretePackage = package as PatrolAIStatePackage;
         AIStateType = AIStateType.Patrol;
-        m_patrolPoints = new List<Vector3>(concretePackage.PatrolPoints);
+
+        if (concretePackage.Patrol)
+            m_patrolPoints = new List<Vector3>(concretePackage.PatrolPoints);
+
+        m_patrol = concretePackage.Patrol;
         m_patrolSpeed = concretePackage.PatrolSpeed;
         m_movement = concretePackage.Controller.GetComponentInRoot<ObjectMovement2DController>();
     }
@@ -21,11 +26,12 @@ public class PatrolAIState : AIState
     private readonly List<Vector3> m_patrolPoints;
     private readonly float m_patrolSpeed;
     private readonly ObjectMovement2DController m_movement;
+    private readonly bool m_patrol;
     private int m_currentPointIndex;
 
-    public override void Update(ObjectAIController controller)
+    public override void Update(ObjectGenericAIController controller)
     {
-        if (m_patrolPoints.Count == 0)
+        if (!m_patrol)
             return;
 
         if (!m_movement.MoveOnXTo(m_patrolSpeed))
@@ -45,7 +51,7 @@ public class PatrolAIState : AIState
 
     public override void OnStateSet()
     {
-        if (m_patrolPoints.Count == 0)
+        if (!m_patrol)
             return;
 
         m_movement.PrepareToMoveOnXTo(m_patrolPoints[m_currentPointIndex].x);
