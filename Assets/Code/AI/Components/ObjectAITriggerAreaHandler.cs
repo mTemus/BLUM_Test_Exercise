@@ -9,7 +9,7 @@ public class ObjectAITriggerAreaHandler : NestedComponent
     private LayerMask TargetLayerMask;
 
     [HideInInspector]
-    public GameObject Target;
+    public GameObject Target { get; private set; }
 
     public AIStateType OnTriggerEnterState;
     public AIStateType OnTriggerExitState;
