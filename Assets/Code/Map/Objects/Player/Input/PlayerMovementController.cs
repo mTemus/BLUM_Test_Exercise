@@ -8,12 +8,13 @@ public class PlayerMovementController : NestedComponent
 
     private InputAction m_movementAction;
     private Rigidbody2D m_rigidbody2D;
+    private ObjectFacing2DState m_facingState;
     private bool m_isStandingStill = true;
-    private bool m_isTurnedRight;
 
     void Awake()
     {
         m_rigidbody2D = GetComponentFromRoot<Rigidbody2D>();
+        m_facingState = GetComponentInRoot<ObjectFacing2DState>();
         var playerInput = GetComponentInRoot<PlayerInput>();
 
         m_movementAction = playerInput.actions.FindAction(MovementActionName);
@@ -34,17 +35,9 @@ public class PlayerMovementController : NestedComponent
         m_isStandingStill = direction == 0f;
         m_rigidbody2D.velocity = new Vector2(direction * MovementSpeed, m_rigidbody2D.velocity.y);
 
-        if (direction != 0)
-            TurnCharacter(direction < 1f);
-    }
-
-    private void TurnCharacter(bool isTurnedRight)
-    {
-        if (isTurnedRight == m_isTurnedRight)
+        if (direction == 0f) 
             return;
 
-        var scale = m_rigidbody2D.transform.localScale;
-        m_rigidbody2D.transform.localScale = new Vector3(scale.x * -1, scale.y, scale.z);
-        m_isTurnedRight = isTurnedRight;
+        m_facingState.IsFacingRight.Value = direction > 0f;
     }
 }

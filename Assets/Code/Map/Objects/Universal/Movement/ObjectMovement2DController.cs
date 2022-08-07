@@ -5,14 +5,15 @@ public class ObjectMovement2DController : NestedComponent
     public float MovementSpeed;
 
     private Rigidbody2D m_rigidbody2D;
+    private ObjectFacing2DState m_facingState;
     private int m_direction = 1;
-    private bool m_isTurnedRight = true;
 
     private float m_goalPosX;
     private float m_goalPosXAbs;
 
     private void Awake()
     {
+        m_facingState = GetComponentInRoot<ObjectFacing2DState>();
         m_rigidbody2D = GetComponentFromRoot<Rigidbody2D>();
     }
 
@@ -29,7 +30,7 @@ public class ObjectMovement2DController : NestedComponent
         m_goalPosX = xPos;
         m_goalPosXAbs = Mathf.Abs(m_goalPosX);
 
-        TurnCharacter(m_direction == 1);
+        m_facingState.IsFacingRight.Value = m_direction == 1;
     }
 
     public bool MoveOnXTo(float speed = 0f)
@@ -41,13 +42,5 @@ public class ObjectMovement2DController : NestedComponent
         return Mathf.Abs(position.x) - m_goalPosXAbs > 0f;
     }
 
-    private void TurnCharacter(bool isTurnedRight)
-    {
-        if (isTurnedRight == m_isTurnedRight)
-            return;
-
-        var scale = m_rigidbody2D.transform.localScale;
-        m_rigidbody2D.transform.localScale = new Vector3(scale.x * -1, scale.y, scale.z);
-        m_isTurnedRight = isTurnedRight;
-    }
+   
 }
