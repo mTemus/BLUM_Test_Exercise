@@ -4,19 +4,19 @@ public class ObjectPhysics2DGroundedHandler : NestedComponent
 {
     [SerializeField] private LayerMask m_groundLayerMask;
 
-    private BoxCollider2D m_Collider;
+    private Collider2D m_Collider;
     private ObjectPhysics2DState m_physics2DState;
 
     private void Awake()
     {
-        m_Collider = GetComponentFromRoot<BoxCollider2D>();
+        m_Collider = GetComponentFromRoot<Collider2D>();
         m_physics2DState = GetComponent<ObjectPhysics2DState>();
     }
 
     private void FixedUpdate()
     {
         var colliderBounds = m_Collider.bounds;
-        var colliderRadius = m_Collider.size.x * 0.4f * Mathf.Abs(transform.localScale.x);
+        var colliderRadius = colliderBounds.size.x * 0.4f * Mathf.Abs(transform.localScale.x);
         var groundCheckPos = colliderBounds.min + new Vector3(colliderBounds.size.x * 0.5f, colliderRadius * 0.9f, 0);
         var colliders = Physics2D.OverlapCircleAll(groundCheckPos, colliderRadius, m_groundLayerMask);
 
