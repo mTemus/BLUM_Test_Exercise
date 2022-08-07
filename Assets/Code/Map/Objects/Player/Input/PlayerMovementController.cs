@@ -35,9 +35,7 @@ public class PlayerMovementController : NestedComponent
         m_isStandingStill = direction == 0f;
         m_rigidbody2D.velocity = new Vector2(direction * MovementSpeed, m_rigidbody2D.velocity.y);
 
-        if (direction == 0f) 
-            return;
-
-        m_facingState.IsFacingRight.Value = direction > 0f;
+        if (!m_isStandingStill)
+            m_facingState.IsFacingRight.Value = direction == 1f;
     }
 }
