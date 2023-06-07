@@ -7,7 +7,7 @@ public class Object2DAnimatorController : NestedComponent
     public const string IsGroundedParameterName = "IsGrounded";
     public const string IsAttackingTriggerName = "IsAttacking";
     public const string GetHitTriggerName = "GetHit";
-    public const string DieHitTriggerName = "Die";
+    public const string DieTriggerName = "Die";
 
     [SerializeField] 
     private bool UpdateVelocity = true;
@@ -59,7 +59,7 @@ public class Object2DAnimatorController : NestedComponent
 
     private void OnDeathStart(string eventName, object data)
     {
-        m_animator.SetTrigger(DieHitTriggerName);
+        m_animator.SetTrigger(DieTriggerName);
     }
 
     private void OnGetHit(SimpleValueBase value)

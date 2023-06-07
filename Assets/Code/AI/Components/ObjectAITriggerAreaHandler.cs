@@ -6,7 +6,7 @@ public class ObjectAITriggerAreaHandler : NestedComponent
     public List<OnDistanceLostAIStateSwitch> AiStateSwitches;
 
     [SerializeField]
-    private LayerMask TargetLayerMask;
+    private LayerMask m_targetLayerMask;
 
     [HideInInspector]
     public GameObject Target { get; private set; }
@@ -16,7 +16,7 @@ public class ObjectAITriggerAreaHandler : NestedComponent
 
     private void OnTriggerEnter2D(Collider2D trigger)
     {
-        if (1 << trigger.gameObject.layer != TargetLayerMask.value)
+        if (1 << trigger.gameObject.layer != m_targetLayerMask.value)
             return;
 
         Target = trigger.gameObject;
@@ -41,7 +41,7 @@ public class ObjectAITriggerAreaHandler : NestedComponent
 
     private void OnTriggerExit2D(Collider2D trigger)
     {
-        if (1 << trigger.gameObject.layer != TargetLayerMask.value)
+        if (1 << trigger.gameObject.layer != m_targetLayerMask.value)
             return;
 
         if (trigger.gameObject != Target)

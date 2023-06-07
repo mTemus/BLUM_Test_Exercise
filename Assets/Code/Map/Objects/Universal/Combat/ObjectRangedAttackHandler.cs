@@ -1,4 +1,4 @@
-﻿public class BombAttackHandler : ObjectAttackHandler
+﻿public class ObjectRangedAttackHandler : ObjectAttackHandler
 {
 
 
